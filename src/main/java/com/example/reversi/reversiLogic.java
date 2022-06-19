@@ -23,6 +23,7 @@ public class reversiLogic {
     private static int whites = 0;
     private static int blacks = 0;
     private AI_Algo algo = null;
+    private static Caretaker caretaker = null;
 
 
     public reversiLogic() {
@@ -43,6 +44,7 @@ public class reversiLogic {
         current_player = " W ";
         whites = 2;
         blacks = 2;
+        caretaker = new Caretaker();
     }
 
     public void setCurrentPlayer() {
@@ -65,6 +67,7 @@ public class reversiLogic {
         current_player = " W ";
         whites = 2;
         blacks = 2;
+        caretaker = new Caretaker();
     }
 
 
@@ -594,6 +597,12 @@ public class reversiLogic {
         }
     }
 
+    public void updateBoard(ArrayList<ArrayList<String>> board) {
+        Board = board;
+    }
+
+    public Caretaker getCareTaker(){return caretaker;}
+
     public void updatePieceCount() {
         blacks = 0;
         whites = 0;
@@ -718,9 +727,31 @@ public class reversiLogic {
         @Override
         public void execute() {
 
-
             //Only if the board piece is an acceptable move
             if(b.getStyle().equals(canPlacePieceHere) ) {
+
+                //Since a move has been made, we will save the previous state of the board
+                ArrayList<ArrayList<String>> old_board = new ArrayList<>();
+
+                for(int i = 0;i<8;i++) {
+                    ArrayList<String> row = new ArrayList<>();
+                    for(int j =0;j<8;j++) {
+                        row.add(Board.get(i).get(j));
+                    }
+                    old_board.add(row);
+                }
+
+                caretaker.push(old_board);
+
+                System.out.println("TESSTTTTTTTTTT");
+                for(int i =0;i<8;i++){
+                    for(int j=0;j<8;j++){
+                        System.out.print(old_board.get(i).get(j) + " ");
+                    }
+                    System.out.println();
+                }
+
+                System.out.println("Saved old board");
 
                 //Updating the board based on the current piece placed.
                 r.updateBoard((int)b.getUserData());

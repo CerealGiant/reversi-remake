@@ -396,7 +396,7 @@ public class View implements gameObserver,Game{
 
     public Text GetPauseText() {return pause_text;}
 
-    private void updateCurrentBoard(ArrayList<ArrayList<String>> board) {
+    public void updateCurrentBoard(ArrayList<ArrayList<String>> board) {
         for(int i =0;i<8;i++) {
             for(int j=0;j<8;j++) {
                 int position = ((i*8) + j);

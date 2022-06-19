@@ -33,6 +33,7 @@ public class HelloController {
     private AI_Algo algo = null;
     private ArrayList<Pair<Integer,Integer>> possible_positions = new ArrayList<>();
     private ArrayList<ArrayList<String>> board = new ArrayList<>();
+    private Caretaker ctaker = new Caretaker();
 
 
 
@@ -110,6 +111,23 @@ public class HelloController {
                     if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
                         s.setScene(pauseScene);
                     }
+
+                    if(keyEvent.getCode().equals(KeyCode.R)) {
+                        ctaker = r.getCareTaker();
+                        if(!ctaker.isEmpty()) {
+                            ArrayList<ArrayList<String>> prev_board = ctaker.pop();
+                            for (int i = 0; i < 8; i++) {
+                                for (int j = 0; j < 8; j++) {
+                                    System.out.print(prev_board.get(i).get(j) + " ");
+                                }
+                                System.out.println();
+                            }
+                            v.updateCurrentBoard(prev_board);
+                            r.updateBoard(prev_board);
+                            System.out.println("Move Reset");
+                        }
+                    }
+
             }
         });
 
