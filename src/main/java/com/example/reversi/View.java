@@ -415,7 +415,7 @@ public class View implements gameObserver,Game{
         }
     }
 
-    private void updateWinIndicator() {
+    public void updateWinIndicator() {
         if(r.getWhites() > r.getBlacks() ) {
             winId2.setVisible(false);
             winId1.setVisible(true);
